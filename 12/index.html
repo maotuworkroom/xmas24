@@ -260,7 +260,65 @@ top: 90px;"   src="https://p3.toutiaoimg.com/tos-cn-i-qvj2lq49k0/d9a30895845249e
 											window.onpageshow = jump2
 										</script>
 
+<!-- 雪花容器 -->
+<div class="snow-container"></div>
 
+<script>
+// 雪花生成函数
+function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.innerHTML = '🍬';
+    
+    // 将雪花追加到雪花容器中
+    document.querySelector('.snow-container').appendChild(snowflake);
+
+    // 设置雪花随机位置和大小
+    const size = Math.random() * 20 + 10 + 'px';
+    snowflake.style.left = Math.random() * 100 + 'vw';
+    snowflake.style.fontSize = size;
+
+    // 雪花下落动画
+    const animationDuration = Math.random() * 3 + 5 + 's';
+    snowflake.style.animation = `fall ${animationDuration} linear`;
+
+    // 动画结束后移除雪花
+    setTimeout(() => {
+        snowflake.remove();
+    }, parseFloat(animationDuration) * 1000);
+}
+
+// 定时生成雪花
+setInterval(createSnowflake, 230);
+
+// 定义动画和雪花样式
+const style = document.createElement('style');
+style.innerHTML = `
+    .snow-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+    }
+    .snowflake {
+        position: absolute;
+        top: -10px;
+        color: white;
+        user-select: none;
+        animation-name: fall;
+    }
+    @keyframes fall {
+        to {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+</script>
 
 	
 	
