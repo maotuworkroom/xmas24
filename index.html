@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳转中...</title>
+    <script>
+        window.onload = function() {
+            const urls = [
+                "https://xmas.xinu.ink/1",
+                "https://xmas.xinu.ink/4",
+                "https://xmas.xinu.ink/6",
+                "https://xmas.xinu.ink/7",
+                "https://xmas.xinu.ink/8",
+                "https://xmas.xinu.ink/9",
+                "https://xmas.xinu.ink/10",
+                "https://xmas.xinu.ink/11",
+                "https://xmas.xinu.ink/12",
+                "https://xmas.xinu.ink/13"
+            ];
+            const randomIndex = Math.floor(Math.random() * urls.length);
+            window.location.href = urls[randomIndex];
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
