@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>跳转中...</title>
     <script>
-        window.onload = function() {
+        (function() {
             const urls = [
                 "https://xmas.xinu.ink/1",
                 "https://xmas.xinu.ink/4",
@@ -18,9 +18,31 @@
                 "https://xmas.xinu.ink/12",
                 "https://xmas.xinu.ink/13"
             ];
-            const randomIndex = Math.floor(Math.random() * urls.length);
-            window.location.href = urls[randomIndex];
-        }
+
+            // 获取或初始化最近访问记录
+            const recentUrls = JSON.parse(localStorage.getItem('recentUrls')) || [];
+            const maxHistory = 3;  // 设置短时间内避免重复的页面数量
+
+            // 过滤掉最近访问的URL
+            const availableUrls = urls.filter(url => !recentUrls.includes(url));
+
+            // 如果所有URL都被访问过，重置最近访问记录
+            const finalUrls = availableUrls.length ? availableUrls : urls;
+
+            // 随机选择一个URL
+            const randomIndex = Math.floor(Math.random() * finalUrls.length);
+            const selectedUrl = finalUrls[randomIndex];
+
+            // 更新最近访问记录
+            recentUrls.push(selectedUrl);
+            if (recentUrls.length > maxHistory) {
+                recentUrls.shift();  // 保持历史记录长度不超过maxHistory
+            }
+            localStorage.setItem('recentUrls', JSON.stringify(recentUrls));
+
+            // 立即跳转
+            window.location.replace(selectedUrl);
+        })();
     </script>
 </head>
 <body>
